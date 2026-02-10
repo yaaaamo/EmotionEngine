@@ -13,6 +13,7 @@ def react(emotion, confidence):
     # Cas de confiance basse (identique pour toutes les émotions)
     if confidence == "low":
         return "ask_clarification", "I think I sense something, but could you clarify your feelings?"
+    # Mapping des réactions pour Medium et High
 
     # Mapping des réactions pour Medium et High
     mapping = {
