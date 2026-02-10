@@ -2,24 +2,19 @@ import sys
 import json
 
 def react(emotion, confidence):
-    # 1. Normalisation : on passe tout en minuscules pour gérer "Anger" ou "HIGH"
-    # On vérifie d'abord que ce sont bien des chaînes de caractères
+    # Ta logique de réaction reste inchangée (elle est parfaite)
     emo = emotion.lower() if isinstance(emotion, str) else None
     conf = confidence.lower() if isinstance(confidence, str) else None
 
-    # Listes des entrées valides (strictement en minuscules)
     valid_emotions = {'joy', 'sadness', 'anger', 'fear', 'disgust', 'surprise'}
     valid_confidences = {'low', 'medium', 'high'}
 
-    # 2. Règle d'entrée invalide (Cas limites : émotion inconnue, None, ou mauvais type)
     if emo not in valid_emotions or conf not in valid_confidences:
         return "ask_clarification", "I'm not sure I understand how you feel. Could you tell me more?"
 
-    # 3. Cas de confiance basse (prioritaire)
     if conf == "low":
         return "ask_clarification", "I think I sense something, but could you clarify your feelings?"
 
-    # 4. Mapping des réactions pour Medium et High
     mapping = {
         "joy": {"medium": "continue", "high": "continue"},
         "sadness": {"medium": "offer_support", "high": "offer_support"},
@@ -29,7 +24,6 @@ def react(emotion, confidence):
         "surprise": {"medium": "continue", "high": "continue"}
     }
 
-    # 5. Messages personnalisés selon l'action
     messages = {
         "continue": "I hear you, please go on.",
         "offer_support": "I'm here for you. Tell me what's on your mind.",
@@ -37,42 +31,36 @@ def react(emotion, confidence):
         "de_escalate": "Let’s pause and try to lower the tension."
     }
 
-    # Récupération sécurisée de l'action
     action = mapping[emo][conf]
     message = messages.get(action, "Please continue.")
-
     return action, message
 
 def main():
     try:
-        # Lecture robuste du flux STDIN
+        # On lit l'intégralité de l'entrée (STDIN)
         input_data = sys.stdin.read().strip()
         if not input_data:
             return
 
-        # Parsing du JSON
+        # On charge le JSON (peut être un objet unique {} ou une liste [])
         data = json.loads(input_data)
 
-        # Extraction sécurisée des clés (gère le cas où une clé manque)
-        emo = data.get("emotion")
-        conf = data.get("confidence")
+        # CAS 1 : C'est une liste d'objets (ton format avec crochets et virgules)
+        if isinstance(data, list):
+            for entry in data:
+                action, message = react(entry.get("emotion"), entry.get("confidence"))
+                print(json.dumps({"action": action, "message": message}))
 
-        # Calcul de la réponse
-        action, message = react(emo, conf)
+        # CAS 2 : C'est un objet JSON unique
+        else:
+            action, message = react(data.get("emotion"), data.get("confidence"))
+            print(json.dumps({"action": action, "message": message}))
 
-        # Sortie JSON strictement formatée sans texte parasite
-        output = {
-            "action": action,
-            "message": message
-        }
-        print(json.dumps(output))
-
-    except (json.JSONDecodeError, Exception):
-        # Cas limite : JSON malformé (ex: une virgule en trop) ou erreur critique
-        # La consigne demande de renvoyer ask_clarification en cas d'erreur
+    except Exception:
+        # En cas de JSON vraiment cassé (ex: guillemet manquant)
         print(json.dumps({
             "action": "ask_clarification",
-            "message": "I encountered an error processing your input. Please provide valid data."
+            "message": "Invalid JSON format. Please provide a valid object or list."
         }))
 
 if __name__ == "__main__":
