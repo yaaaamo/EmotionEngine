@@ -2,7 +2,6 @@ import sys
 import json
 
 def react(emotion, confidence):
-    # Ta logique de réaction reste inchangée (elle est parfaite)
     emo = emotion.lower() if isinstance(emotion, str) else None
     conf = confidence.lower() if isinstance(confidence, str) else None
 
