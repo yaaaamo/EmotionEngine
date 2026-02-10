@@ -1,0 +1,7 @@
+[
+  {"emotion": "anger", "confidence": "high"},
+  {"emotion": "joy", "confidence": "medium"},
+  {"emotion": "sadness", "confidence": "low"},
+  {"emotion": "fear", "confidence": "high"},
+  {"emotion": "invalid", "confidence": "high"}
+]
