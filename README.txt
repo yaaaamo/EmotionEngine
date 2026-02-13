@@ -73,6 +73,9 @@ dialogue_example.jsonl file as input:
 
     cd C:\Users\merie\IdeaProjects\EmotionEngine
     type dialogue_example.jsonl | py main.py
+    
+    if the python version is python3 :  
+    python3 main.py < dialogue_example.jsonl
 
 The program will:
   - read each JSON line from dialogue_example.jsonl,
@@ -168,4 +171,4 @@ The project only uses Python standard libraries:
   - sys
   - json
 
-
+The project also use function react from program.py

@@ -1,0 +1,118 @@
+AI Usage Log - Emotion-Reaction Engine Week 2
+==============================================
+
+================================================================================
+PROMPT 1
+================================================================================
+User: "How do I read multiple JSON objects from stdin in Python, one per line?"
+
+AI Response:
+"You can use a for loop to iterate over sys.stdin, which reads line by line:
+
+import sys
+import json
+
+for line in sys.stdin:
+    line = line.strip()
+    if line:
+        data = json.loads(line)
+        # process data
+
+Each iteration gives you one line, and you can parse it as JSON."
+
+What I used/changed: I used this pattern for the main loop to read JSON Lines format from stdin.
+
+================================================================================
+PROMPT 2
+================================================================================
+User: "How should I implement a state machine in Python for dialogue management?"
+
+AI Response:
+"A simple approach is to use a string variable for the current state and a function to compute transitions:
+
+current_state = 'START'
+
+def update_state(current_state, action):
+    if current_state == 'END':
+        return 'END'
+    if action == 'offer_support':
+        return 'SUPPORT'
+    elif action == 'de_escalate':
+        return 'DEESCALATE'
+    return current_state
+
+This keeps the state logic separate and testable."
+
+What I used/changed: I implemented the update_state function following this pattern with the exact transition rules from the assignment.
+
+================================================================================
+PROMPT 3
+================================================================================
+User: "What is JSON Lines format and how is it different from a JSON array?"
+
+AI Response:
+"JSON Lines (also called JSONL or newline-delimited JSON) is a format where each line is a separate, valid JSON object:
+
+{'name': 'Alice'}
+{'name': 'Bob'}
+
+Unlike a JSON array, you don't need commas between items or wrapping brackets. This makes it easy to stream and process line by line without loading everything into memory."
+
+What I used/changed: I understood the input format requirement - one JSON object per line, not a JSON array. Each line is processed independently.
+
+================================================================================
+PROMPT 4
+================================================================================
+User: "How can I ensure my messages contain specific keywords for the SUPPORT and DEESCALATE states?"
+
+AI Response:
+"Define your action messages to include the required keywords:
+
+For SUPPORT state (requires: help, support, or here):
+'I'm here to support you. How can I help?'
+
+For DEESCALATE state (requires: calm, pause, or slow):
+'Let's pause and try to calm things down.'
+
+These messages satisfy the constraints while sounding natural."
+
+What I used/changed: I updated the ACTION_MESSAGES dictionary to ensure offer_support messages contain "here", "support", and "help", and de_escalate messages contain "pause" and "calm".
+
+================================================================================
+PROMPT 5
+================================================================================
+User: "How do I handle errors gracefully in the dialogue loop without crashing?"
+
+AI Response:
+"Wrap your JSON parsing and processing in try-except blocks:
+
+try:
+    data = json.loads(line)
+    # process
+except json.JSONDecodeError:
+    # return error response
+except Exception:
+    # handle other errors
+
+This way, if one line fails, you can return an error response and continue processing the next lines."
+
+What I used/changed: I added try-except blocks in process_line() to handle JSONDecodeError and general exceptions, returning ask_clarification action on errors.
+
+================================================================================
+PROMPT 6
+================================================================================
+User: "Can you help me create test cases for the multi-turn dialogue?"
+
+AI Response:
+"Create a .jsonl file with multiple scenarios:
+
+# Test state transitions
+{'user_text':'I failed','emotion':'sadness','confidence':'high'}  -> SUPPORT
+{'user_text':'Im angry','emotion':'anger','confidence':'high'}    -> DEESCALATE
+
+# Test invalid input
+{'user_text':'test','emotion':'invalid','confidence':'high'}      -> ask_clarification
+
+Run with: python3 emotion_engine.py < dialogue_example.jsonl"
+
+What I used/changed: I created dialogue_example.jsonl with various test cases including state transitions and invalid inputs.

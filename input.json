@@ -1,8 +1,0 @@
-[
-  {"emotion": "pizza", "confidence": "high"},
-  {"emotion": "anger", "confidence": "high"},
-  {"emotion": "joy", "confidence": "low"},
-  {"emotion": "sadness", "confidence": "medium"},
-  {"emotion": "ANGER", "confidence": "high"},
-  {"emotion": "fear"}
-]
