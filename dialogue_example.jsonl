@@ -1,0 +1,27 @@
+{"user_text":"I failed again.","emotion":"sadness","confidence":"high"}
+{"user_text":"Whatever.","emotion":"anger","confidence":"medium"}
+{"user_text":"I think things are going well.","emotion":"joy","confidence":"medium"}
+{"user_text":"I'm really scared about tomorrow.","emotion":"fear","confidence":"high"}
+{"user_text":"This is disgusting.","emotion":"disgust","confidence":"high"}
+{"user_text":"Oh wow, I didn't expect that.","emotion":"surprise","confidence":"medium"}
+{"user_text":"I feel really happy today!","emotion":"joy","confidence":"high"}
+{"user_text":"I'm kind of happy, I guess.","emotion":"joy","confidence":"medium"}
+{"user_text":"I'm not sure how I feel.","emotion":"joy","confidence":"low"}
+{"user_text":"I failed my exam again.","emotion":"sadness","confidence":"high"}
+{"user_text":"I feel a bit down lately.","emotion":"sadness","confidence":"medium"}
+{"user_text":"Maybe I'm a little sad, I don't know.","emotion":"sadness","confidence":"low"}
+{"user_text":"I'm so angry at them!","emotion":"anger","confidence":"high"}
+{"user_text":"This situation annoys me.","emotion":"anger","confidence":"medium"}
+{"user_text":"I might be a bit irritated.","emotion":"anger","confidence":"low"}
+{"user_text":"I'm really scared about the future.","emotion":"fear","confidence":"high"}
+{"user_text":"This makes me a bit nervous.","emotion":"fear","confidence":"medium"}
+{"user_text":"I'm maybe slightly worried.","emotion":"fear","confidence":"low"}
+{"user_text":"This is disgusting, I hate it.","emotion":"disgust","confidence":"high"}
+{"user_text":"I kind of dislike this.","emotion":"disgust","confidence":"medium"}
+{"user_text":"Maybe it's a bit gross.","emotion":"disgust","confidence":"low"}
+{"user_text":"Wow, I didn't expect that at all!","emotion":"surprise","confidence":"high"}
+{"user_text":"Oh, that's surprising.","emotion":"surprise","confidence":"medium"}
+{"user_text":"Maybe it's a little unexpected.","emotion":"surprise","confidence":"low"}
+{"user_text":"I feel like pizza, not an emotion lol.","emotion":"pizza","confidence":"high"}
+{"user_text":"I forgot to specify the confidence.","emotion":"anger","confidence":""}
+{"user_text":"Random text with wrong emotion.","emotion":"unknown","confidence":"medium"}
